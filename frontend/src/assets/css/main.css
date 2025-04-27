@@ -1,1 +1,21 @@
 @import './reset.css';
+@import './font.css';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+  background-color: var(--body-bg-color);
+}
+
+:root {
+  --body-bg-color: #f5f7fa;
+  --item-bg-white: #ffffff;
+  --item-bg-lighter: #f8f9fa;
+
+  --aside-width: 150px;
+  --header-height: 60px;
+  --default-border-radius: 8px;
+}

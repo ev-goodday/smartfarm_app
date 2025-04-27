@@ -21,11 +21,11 @@ import HeaderComponent from '@/components/common/HeaderComponent.vue'
   display: flex;
   height: 100vh;
   overflow: hidden;
-  background-color: #f5f7fa;
+  background-color: var(--body-bg-color);
 
   .main-content {
     flex: 1;
-    margin-left: 150px;
+    margin-left: var(--aside-width);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -35,7 +35,7 @@ import HeaderComponent from '@/components/common/HeaderComponent.vue'
       overflow: auto;
       padding: 0;
       margin: 0;
-      height: calc(100vh - 60px);
+      height: calc(100vh - var(--header-height));
     }
   }
 }

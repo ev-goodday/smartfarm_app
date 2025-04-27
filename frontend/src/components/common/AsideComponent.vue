@@ -33,7 +33,7 @@
 
 <style lang="scss" scoped>
 aside {
-  width: 150px;
+  width: var(--aside-width);
   height: 100vh;
   background-color: #fff;
   position: fixed;

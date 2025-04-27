@@ -21,7 +21,7 @@ export default {}
 
 <style lang="scss" scoped>
 header {
-  height: 60px;
+  height: var(--header-height);
   padding: 0 20px;
   background-color: #fff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
