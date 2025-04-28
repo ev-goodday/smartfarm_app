@@ -65,6 +65,85 @@
         </div>
       </div>
     </section>
+
+    <!-- 모니터링 섹션 -->
+    <section class="section-monitor">
+      <div class="section-content">
+        <!-- 카메라 섹션 -->
+        <div class="monitor-camera">
+          <div class="monitor-camera__header">
+            <div class="monitor-camera__title">
+              <span>Camera 1</span>
+            </div>
+            <div class="monitor-camera__link">
+              <img src="" alt="" />
+            </div>
+          </div>
+          <div class="monitor-camera__image">
+            <img src="" alt="" />
+          </div>
+          <div class="monitor-camera__actions">
+            <button class="action-button">
+              <img src="" alt="" />
+            </button>
+            <button class="action-button">
+              <img src="" alt="" />
+            </button>
+            <button class="action-button">
+              <img src="" alt="" />
+            </button>
+            <button class="action-button">
+              <img src="" alt="" />
+            </button>
+          </div>
+        </div>
+
+        <!-- 작업 섹션 -->
+        <div class="monitor-tasks">
+          <div class="monitor-tasks__header">
+            <div class="monitor-tasks__title">
+              <span>Task</span>
+            </div>
+            <div class="monitor-tasks__progress">
+              <span>40%</span>
+              <span>2/5 Task Completed</span>
+            </div>
+          </div>
+          <div class="monitor-tasks__list">
+            <!-- 작업 항목 -->
+            <div class="task-item task-item--completed">
+              <div class="task-item__header">
+                <span class="task-item__title">자동 관수 작업</span>
+                <span class="task-item__status">
+                  <!-- <img src="" alt="" /> -->
+                </span>
+              </div>
+              <div class="task-item__body">
+                <span class="task-item__description">
+                  토양 수분 센서 기반 스마트 관수 시스템 가동
+                </span>
+                <span class="task-item__time">06:30 AM - 07:00 AM</span>
+              </div>
+            </div>
+
+            <div class="task-item task-item--pending">
+              <div class="task-item__header">
+                <span class="task-item__title">환경 제어</span>
+                <span class="task-item__status">
+                  <!-- <img src="" alt="" /> -->
+                </span>
+              </div>
+              <div class="task-item__body">
+                <span class="task-item__description">
+                  온실 내부 온도 및 습도 최적화를 위한 환기 시스템 작동
+                </span>
+                <span class="task-item__time">10:00 AM - 10:30 AM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -78,7 +157,8 @@
   background-color: var(--body-bg-color);
 
   .section-map,
-  .section-sensor {
+  .section-sensor,
+  .section-monitor {
     flex: 1;
     margin: 5px 5px 0 5px;
     border-radius: var(--default-border-radius);
@@ -373,6 +453,207 @@
               color: #64748b;
               font-weight: normal;
               font-size: 0.9em;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .section-monitor {
+    margin-right: 10px;
+    .section-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+      overflow: hidden;
+
+      .monitor-camera {
+        background-color: #f8fafc;
+        border-radius: var(--default-border-radius);
+        padding: 15px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+        &__header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 10px;
+        }
+
+        &__title {
+          display: flex;
+          align-items: center;
+          font-size: 1.1em;
+          font-weight: bold;
+          color: #1e293b;
+        }
+
+        &__link {
+          width: 32px;
+          height: 32px;
+          border-radius: var(--default-border-radius);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          background-color: #f1f5f9;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background-color: #e2e8f0;
+          }
+        }
+
+        &__image {
+          width: 100%;
+          height: 330px;
+          border-radius: var(--default-border-radius);
+          background-color: #f1f5f9;
+          overflow: hidden;
+          margin-bottom: 10px;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+
+        &__actions {
+          display: flex;
+          gap: 5px;
+
+          .action-button {
+            padding: 8px;
+            border: none;
+            border-radius: var(--default-border-radius);
+            background-color: #f1f5f9;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+              background-color: #e2e8f0;
+            }
+
+            & > img {
+              width: 24px;
+              height: 24px;
+            }
+          }
+        }
+      }
+
+      .monitor-tasks {
+        flex: 1;
+        overflow-y: auto;
+        min-height: 0;
+        border-radius: var (--default-border-radius);
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        background-color: var(--home-bg-color);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+        &__header {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        &__title {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 1.1em;
+          font-weight: bold;
+          color: #1e293b;
+        }
+
+        &__progress {
+          display: flex;
+          justify-content: space-between;
+
+          span {
+            &:first-child {
+              font-weight: bold;
+              color: var(--item-blue-color);
+            }
+            &:last-child {
+              font-size: 0.9em;
+              color: #64748b;
+            }
+          }
+        }
+
+        &__list {
+          overflow-y: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          .task-item {
+            padding: 12px;
+            border-radius: var (--default-border-radius);
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+            &--completed {
+              border-left: 5px solid var(--item-blue-color);
+              background-color: #ffffff;
+
+              .task-item__status img {
+                filter: invert(45%) sepia(98%) saturate(1234%) hue-rotate(199deg) brightness(97%)
+                  contrast(96%);
+              }
+            }
+
+            &--pending {
+              border-left: 5px solid #cbd5e1;
+              background-color: #ffffff;
+
+              .task-item__status img {
+                filter: brightness(0);
+              }
+            }
+
+            &__header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 8px;
+            }
+
+            &__body {
+              display: flex;
+              flex-direction: column;
+              gap: 4px;
+            }
+
+            &__title {
+              font-size: 1em;
+              font-weight: bold;
+              color: #1e293b;
+            }
+
+            &__status {
+              cursor: pointer;
+              img {
+                width: 24px;
+                height: 24px;
+              }
+            }
+
+            &__description {
+              font-size: 0.85em;
+              color: #64748b;
+            }
+
+            &__time {
+              font-size: 0.8em;
+              color: #64748b;
             }
           }
         }
