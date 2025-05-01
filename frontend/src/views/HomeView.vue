@@ -2,25 +2,27 @@
   <div class="layout-dashboard">
     <!-- 지도 섹션 -->
     <section class="section-map">
-      <div class="section-map__view"></div>
+      <div class="section-map__view">
+        <div v-if="selectedHouse" class="house-indicator">선택된 하우스: {{ getHouseName }}</div>
+      </div>
+      <!-- <div class="section-map__view"></div> -->
       <ul class="section-map__indicators">
-        <li class="indicator-item">
+        <li class="indicator-item" v-for="(sensor, index) in filteredSensors" :key="index">
           <div class="sensor-card">
             <div class="sensor-card__header">
               <div class="sensor-card__title">
                 <div class="sensor-card_icon">
                   <!-- <img src="" alt=""> -->
                 </div>
-
-                <div class="sensor-card__label">습도</div>
+                <div class="sensor-card__label">{{ sensor.name }}</div>
               </div>
             </div>
             <div>
               <div class="sensor-card__value">
-                30
-                <span>%</span>
+                {{ sensor.value }}
+                <span>{{ sensor.unit }}</span>
               </div>
-              <div class="sensor-card__description">습도가 너무 높습니다.</div>
+              <div class="sensor-card__description">{{ sensor.description }}</div>
             </div>
           </div>
         </li>
@@ -33,7 +35,7 @@
         <div class="device-card">
           <div class="device-card__header">
             <div class="device-card__title">Device</div>
-            <RouterLink>
+            <RouterLink to="/detail" class="device-card__link">
               <!-- <img src="" alt=""> -->
             </RouterLink>
           </div>
@@ -147,7 +149,61 @@
   </div>
 </template>
 
-<script></script>
+<script setup>
+import { ref, computed, watch } from 'vue'
+
+const props = defineProps({
+  selectedHouse: {
+    type: String,
+    default: '',
+  },
+})
+
+const sensorsData = ref({
+  house1: [
+    { name: '온도', value: 25, unit: '°C', description: '적정 온도를 유지하고 있습니다.' },
+    { name: '습도', value: 65, unit: '%', description: '습도가 적정 수준입니다.' },
+    { name: '토양 수분', value: 42, unit: '%', description: '토양 수분이 적절합니다.' },
+  ],
+  house2: [
+    { name: '온도', value: 28, unit: '°C', description: '온도가 약간 높습니다.' },
+    { name: '습도', value: 82, unit: '%', description: '습도가 너무 높습니다.' },
+    { name: 'CO2', value: 680, unit: 'ppm', description: 'C02 농도가 정상입니다.' },
+  ],
+  house3: [
+    { name: '온도', value: 22, unit: '°C', description: '온도가 약간 낮습니다.' },
+    { name: '습도', value: 55, unit: '%', description: '습도가 적정 수준입니다.' },
+    { name: '조도', value: 5400, unit: 'lxu', description: '조도가 충분합니다.' },
+  ],
+})
+
+const filteredSensors = computed(() => {
+  if (!props.selectedHouse) return []
+  return sensorsData.value[props.selectedHouse] || []
+})
+
+const getHouseName = computed(() => {
+  switch (props.selectedHouse) {
+    case 'house1':
+      return '하우스 1'
+    case 'house2':
+      return '하우스 2'
+    case 'house3':
+      return '하우스 3'
+    default:
+      return ''
+  }
+})
+
+watch(
+  () => props.selectedHouse,
+  (newValue) => {
+    if (newValue) {
+      console.log(`선택된 하우스 변경: ${newValue}`)
+    }
+  },
+)
+</script>
 
 <style lang="scss" scoped>
 .layout-dashboard {
@@ -660,5 +716,14 @@
       }
     }
   }
+}
+
+.house-indicator {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: var(--default-border-radius);
+  font-weight: bold;
+  margin: 10px;
 }
 </style>
