@@ -8,11 +8,31 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      props: true,
     },
     {
       path: '/profile',
       name: 'profile',
       component: () => import('@/views/ProfileView.vue'),
+      props: true,
+    },
+    {
+      path: '/chart',
+      name: 'chart',
+      component: () => import('@/views/ChartView.vue'),
+      props: true,
+    },
+    {
+      path: '/detail',
+      name: 'detail',
+      component: () => import('@/views/DetailView.vue'),
+      props: true,
+    },
+    {
+      path: '/setting',
+      name: 'setting',
+      component: () => import('@/views/SettingView.vue'),
+      props: true,
     },
   ],
 })

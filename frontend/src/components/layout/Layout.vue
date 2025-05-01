@@ -3,9 +3,9 @@
     <AsideComponent />
 
     <div class="main-content">
-      <HeaderComponent />
+      <HeaderComponent @house-selected="updateSelectedHouse" />
       <div class="content-container">
-        <RouterView />
+        <RouterView :selectedHouse="selectedHouse" />
       </div>
     </div>
   </div>
@@ -14,6 +14,17 @@
 <script setup>
 import AsideComponent from '@/components/common/AsideComponent.vue'
 import HeaderComponent from '@/components/common/HeaderComponent.vue'
+
+import { ref } from 'vue'
+
+const selectedHouse = ref('')
+
+function updateSelectedHouse(house) {
+  console.log('Selected house:', house)
+
+  selectedHouse.value = house
+  localStorage.setItem('selectedHouse', house)
+}
 </script>
 
 <style lang="scss" scoped>

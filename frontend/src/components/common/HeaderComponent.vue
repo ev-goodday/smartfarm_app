@@ -4,10 +4,11 @@
       <nav class="main-nav">
         <div class="service-tile">스마트팜 관리 시스템</div>
         <div>선택된 하우스 :</div>
-        <select class="house-select">
-          <option value="1">하우스 선택</option>
-          <option value="2">하우스 1</option>
-          <option value="3">하우스 2</option>
+        <select class="house-selector" v-model="selectedHouse" @change="handleHouseChange">
+          <option value="">하우스 선택</option>
+          <option value="house1">하우스 1</option>
+          <option value="house2">하우스 2</option>
+          <option value="house3">하우스 3</option>
         </select>
         <RouterLink to="/profile" class="profile-link" />
       </nav>
@@ -15,8 +16,23 @@
   </header>
 </template>
 
-<script>
-export default {}
+<script setup>
+import { ref, onMounted, defineEmits } from 'vue'
+
+const emit = defineEmits(['house-selected'])
+const selectedHouse = ref('')
+
+function handleHouseChange() {
+  emit('house-selected', selectedHouse.value)
+}
+
+onMounted(() => {
+  const savedHouse = localStorage.getItem('selectedHouse')
+  if (savedHouse) {
+    selectedHouse.value = savedHouse
+    emit('house-selected', savedHouse)
+  }
+})
 </script>
 
 <style lang="scss" scoped>
