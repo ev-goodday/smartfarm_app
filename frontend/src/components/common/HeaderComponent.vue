@@ -17,7 +17,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted, defineEmits } from 'vue'
+import { ref, onMounted, defineEmits, computed } from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
+
+const houses = computed(() => store.state.house.houses)
+
+console.log('houses', houses.value)
 
 const emit = defineEmits(['house-selected'])
 const selectedHouse = ref('')
