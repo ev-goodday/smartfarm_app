@@ -4,11 +4,11 @@
       <nav class="main-nav">
         <div class="service-tile">스마트팜 관리 시스템</div>
         <div>선택된 하우스 :</div>
-        <select class="house-selector" v-model="selectedHouse" @change="handleHouseChange">
+        <select class="house-selector" v-model="selectedHouseId">
           <option value="">하우스 선택</option>
-          <option value="house1">하우스 1</option>
-          <option value="house2">하우스 2</option>
-          <option value="house3">하우스 3</option>
+          <option v-for="(house, index) in houses" :key="index" :value="house.house_id">
+            {{ house.name }}
+          </option>
         </select>
         <RouterLink to="/profile" class="profile-link" />
       </nav>
@@ -17,29 +17,22 @@
 </template>
 
 <script setup>
-import { ref, onMounted, defineEmits, computed } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
 
 const houses = computed(() => store.state.house.houses)
-
-console.log('houses', houses.value)
-
-const emit = defineEmits(['house-selected'])
-const selectedHouse = ref('')
-
-function handleHouseChange() {
-  emit('house-selected', selectedHouse.value)
-}
-
-onMounted(() => {
-  const savedHouse = localStorage.getItem('selectedHouse')
-  if (savedHouse) {
-    selectedHouse.value = savedHouse
-    emit('house-selected', savedHouse)
-  }
+const selectedHouseId = computed({
+  get: () => store.state.house.selectedHouse || '',
+  set: (value) => handleHouseChange(value),
 })
+
+const handleHouseChange = (value) => {
+  const house = houses.value[value]
+
+  store.dispatch('house/selectHouse', house)
+}
 </script>
 
 <style lang="scss" scoped>

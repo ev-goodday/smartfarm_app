@@ -3,10 +3,7 @@ export default {
 
   state: {
     houses: {
-      1: {
-        name: '스마트팜 1호기',
-        house_id: 1,
-      },
+      1: { name: '스마트팜 1호기', house_id: 1 },
       2: { name: '스마트팜 2호기', house_id: 2 },
       3: { name: '스마트팜 3호기', house_id: 3 },
     },
@@ -17,14 +14,14 @@ export default {
     SET_HOUSES(state, houses) {
       state.houses = houses
     },
-    SET_SELECTED_HOUSES(state, house) {
+    SET_SELECTED_HOUSE(state, house) {
       state.selectedHouse = house
     },
   },
 
   actions: {
     selectHouse({ commit }, house) {
-      commit('SET_SELECTED_HOUSES', house)
+      commit('SET_SELECTED_HOUSE', house)
     },
   },
 
