@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 
+import houseRoutes from "./composition/house/routes/houseRoutes.js";
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -14,6 +16,9 @@ app.use(
         credentials: true,
     })
 );
+
+// 라우터 설정
+app.use("/house", houseRoutes);
 
 app.get("/", (req, res) => {
     res.send(" Express API 서버가 실행 중입니다.");

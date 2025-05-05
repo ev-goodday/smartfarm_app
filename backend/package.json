@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "app.js",
     "scripts": {
-        "dev": "nodemon --exec babel-node app.js"
+        "dev": "nodemon --exec babel-node src/app.js"
     },
     "keywords": [],
     "author": "",
