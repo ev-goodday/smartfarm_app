@@ -1,9 +1,9 @@
 import houseService from "../service/houseService";
 
 class HouseController {
-    async getHouseList(req, res) {
+    async getHouseById(req, res) {
         try {
-            const house = await houseService.getAllHouse();
+            const house = await houseService.getHouseById(req.params.id);
 
             if (!house) {
                 return res.status(404).json({
@@ -13,7 +13,7 @@ class HouseController {
 
             res.json(house);
         } catch (err) {
-            console.error("하우스 조회 중 오류 발생: ", err);
+            console.error("하우스 조회 중 서버 오류 발생: ", err);
             res.status(500).json({
                 error: "서버 오류가 발생했습니다.",
             });

@@ -3,6 +3,6 @@ import houseController from "../controller/houseController.js";
 
 const router = express.Router();
 
-router.get("/", houseController.getHouseList);
+router.get("/:id", houseController.getHouseById);
 
 export default router;
