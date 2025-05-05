@@ -1,12 +1,16 @@
+import houseService from "../service/houseService";
+
 class HouseController {
     async getHouseList(req, res) {
         try {
-            const a = 10;
+            const a = 50;
             const b = 20;
+
+            const sum = await houseService.getHouse(a, b);
 
             res.status(200).json({
                 message: "Good",
-                data: a + b,
+                data: sum.data,
             });
         } catch (err) {
             console.error(err);
