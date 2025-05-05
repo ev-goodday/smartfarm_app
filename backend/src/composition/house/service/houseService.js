@@ -1,9 +1,17 @@
+import { pool } from "../../../models/db.js";
+
 class HouseService {
-    async getHouse(a, b) {
+    async getAllHouse() {
+        let conn;
         try {
-            return {
-                data: a + b,
-            };
+            conn = await pool.getConnection();
+
+            const rows = await conn.query(
+                `
+                    SELECT * FROM house
+                `
+            );
+            return rows.length ? rows : null;
         } catch (err) {
             console.error(err);
             throw new Error("서버 에러");

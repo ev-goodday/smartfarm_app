@@ -3,19 +3,19 @@ import houseService from "../service/houseService";
 class HouseController {
     async getHouseList(req, res) {
         try {
-            const a = 50;
-            const b = 20;
+            const house = await houseService.getAllHouse();
 
-            const sum = await houseService.getHouse(a, b);
+            if (!house) {
+                return res.status(404).json({
+                    message: "데이터를 찾을 수 없습니다.",
+                });
+            }
 
-            res.status(200).json({
-                message: "Good",
-                data: sum.data,
-            });
+            res.json(house);
         } catch (err) {
-            console.error(err);
+            console.error("하우스 조회 중 오류 발생: ", err);
             res.status(500).json({
-                message: "서버 에러",
+                error: "서버 오류가 발생했습니다.",
             });
         }
     }

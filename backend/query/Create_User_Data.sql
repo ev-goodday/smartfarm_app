@@ -1,0 +1,2 @@
+INSERT INTO smartfarm.user (login_id, password, name, email, phone, department, position, status) VALUES
+    ('farm_admin', 'hash_password', '스마트팜관리자', 'admin@smarfarm.com', '010-1234-5678', '기술개발부', '시스템 관리', 'active');
