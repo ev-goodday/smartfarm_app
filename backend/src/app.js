@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 
 import houseRoutes from "./composition/house/routes/houseRoutes.js";
+import { testConnection } from "./models/db.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,12 +18,15 @@ app.use(
     })
 );
 
-// 라우터 설정
-app.use("/house", houseRoutes);
+// 데이터베이스 연결 테스트
+testConnection();
 
 app.get("/", (req, res) => {
     res.send(" Express API 서버가 실행 중입니다.");
 });
+
+// 라우터 설정
+app.use("/house", houseRoutes);
 
 app.listen(PORT, () => {
     console.log(`서버가 http://localhost:${PORT} 에서 실행 중입니다.`);
