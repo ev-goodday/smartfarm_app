@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
@@ -29,10 +29,20 @@ const selectedHouseId = computed({
 })
 
 const handleHouseChange = (value) => {
+  console.log('선택된 ID:', value)
+
   const house = houses.value[value]
 
   store.dispatch('house/selectHouse', house)
 }
+
+onMounted(async () => {
+  try {
+    await store.dispatch('house/fetchHouses')
+  } catch (error) {
+    console.error('하우스 목록 로딩 실패:', error)
+  }
+})
 </script>
 
 <style lang="scss" scoped>
