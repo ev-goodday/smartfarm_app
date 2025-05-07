@@ -6,7 +6,7 @@
         <div>선택된 하우스 :</div>
         <select class="house-selector" v-model="selectedHouseId">
           <option value="">하우스 선택</option>
-          <option v-for="(house, index) in houses" :key="index" :value="house.house_id">
+          <option v-for="(house, index) in houses" :key="index" :value="index">
             {{ house.name }}
           </option>
         </select>

@@ -151,22 +151,22 @@
 
 <script setup>
 import store from '@/store'
-import { ref, computed, watch, onUpdated } from 'vue'
+import { ref, computed } from 'vue'
 
 const selectedHouse = computed(() => store.state.house.selectedHouse)
 
 const sensorsData = ref({
-  1: [
+  11: [
     { name: '온도', value: 25, unit: '°C', description: '적정 온도를 유지하고 있습니다.' },
     { name: '습도', value: 65, unit: '%', description: '습도가 적정 수준입니다.' },
     { name: '토양 수분', value: 42, unit: '%', description: '토양 수분이 적절합니다.' },
   ],
-  2: [
+  12: [
     { name: '온도', value: 28, unit: '°C', description: '온도가 약간 높습니다.' },
     { name: '습도', value: 82, unit: '%', description: '습도가 너무 높습니다.' },
     { name: 'CO2', value: 680, unit: 'ppm', description: 'C02 농도가 정상입니다.' },
   ],
-  3: [
+  13: [
     { name: '온도', value: 22, unit: '°C', description: '온도가 약간 낮습니다.' },
     { name: '습도', value: 55, unit: '%', description: '습도가 적정 수준입니다.' },
     { name: '조도', value: 5400, unit: 'lxu', description: '조도가 충분합니다.' },
