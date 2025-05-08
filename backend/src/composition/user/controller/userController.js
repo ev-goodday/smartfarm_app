@@ -15,6 +15,21 @@ class UserController {
             res.status(500).json({ message: "서버 오류가 발생했습니다." });
         }
     }
+
+    async getUserDeviceById(req, res) {
+        try {
+            const user = await userService.getUserDeviceById(req.params.id);
+            if (!user) {
+                return res
+                    .status(404)
+                    .json({ message: "디바이스가 없습니다." });
+            }
+            res.json(user);
+        } catch (err) {
+            console.error("디바이스가 조회 중 오류 발생:", err);
+            res.status(500).json({ message: "서버 오류가 발생했습니다." });
+        }
+    }
 }
 
 export default new UserController();
