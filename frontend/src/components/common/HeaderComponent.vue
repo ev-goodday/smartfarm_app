@@ -10,7 +10,7 @@
             {{ house.name }}
           </option>
         </select>
-        <RouterLink to="/profile" class="profile-link" />
+        <RouterLink to="/profile" class="profile-link" :style="profileStyle" />
       </nav>
     </div>
   </header>
@@ -27,6 +27,10 @@ const selectedHouseId = computed({
   get: () => store.state.house.selectedHouse || '',
   set: (value) => handleHouseChange(value),
 })
+
+const profileStyle = computed(() => ({
+  backgroundImage: `url(${store.state.user.profile_image})`,
+}))
 
 const handleHouseChange = (value) => {
   console.log('선택된 ID:', value)

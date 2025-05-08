@@ -21,6 +21,9 @@ export default {
     SET_USER(state, user) {
       Object.assign(state, user)
     },
+    SET_USER_DEVICES(state, userDevices) {
+      state.userDevices = userDevices
+    },
   },
 
   actions: {
@@ -30,6 +33,16 @@ export default {
         commit('SET_USER', response.data)
       } catch (error) {
         console.error('사용자 정보 조회 실패:', error)
+        throw error
+      }
+    },
+
+    async fetchUserDevices({ commit, state }) {
+      try {
+        const response = await axios.get(`/user/device/${state.userId}`)
+        commit('SET_USER_DEVICES', response.data)
+      } catch (error) {
+        console.error('사용자 디바이스 조회 실패:', error)
         throw error
       }
     },
