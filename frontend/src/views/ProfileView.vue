@@ -56,6 +56,47 @@
             </div>
           </div>
         </div>
+
+        <div class="panels-row">
+          <!-- 알림 설정 패널 -->
+          <div class="panel notification-panel">
+            <h2>알림 설정</h2>
+            <div class="notification-settings">
+              <div class="setting-item">
+                <div class="setting-label">
+                  <span>이메일 알림</span>
+                  <span class="setting-desc">중요 알림을 이메일로 받기</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+
+              <div class="setting-item">
+                <div class="setting-label">
+                  <span>SMS 알림</span>
+                  <span class="setting-desc">긴급 알림을 SMS로 받기</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+
+              <div class="setting-item">
+                <div class="setting-label">
+                  <span>브라우저 알림</span>
+                  <span class="setting-desc">웹 브라우저 푸시 알림 받기</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -190,6 +231,16 @@ onMounted(async () => {
         border-bottom: 2px solid var(--body-bg-color);
       }
     }
+
+    .panels-row {
+      display: flex;
+      gap: 25px;
+
+      & > .panel {
+        flex: 1;
+      }
+    }
+
     .user-info-panel {
       .info-list {
         display: flex;
@@ -213,6 +264,88 @@ onMounted(async () => {
           .info-value {
             color: #2c3e50;
             font-size: 1em;
+          }
+        }
+      }
+    }
+
+    .notification-panel {
+      .notification-settings {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .setting-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px;
+          background-color: var(--item-bg-lighter);
+          border-radius: var(--default-border-radius);
+
+          .setting-label {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            span {
+              color: #2c3e50;
+              font-weight: 500;
+              font-size: 1em;
+            }
+
+            .setting-desc {
+              font-size: 0.9em;
+              color: #7f8c8d;
+              font-weight: normal;
+            }
+          }
+
+          .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+
+            input {
+              opacity: 0;
+              width: 0;
+              height: 0;
+
+              &:checked + .toggle-slider {
+                background-color: var(--item-green-color);
+              }
+
+              &:checked + .toggle-slider::before {
+                transform: translateX(30px);
+              }
+            }
+
+            .toggle-slider {
+              position: absolute;
+              cursor: pointer;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background-color: #ccc;
+              transition: 0.4s;
+              border-radius: 34px;
+              box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+
+              &:before {
+                position: absolute;
+                content: '';
+                height: 22px;
+                width: 22px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                transition: 0.4s;
+                border-radius: 50%;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+              }
+            }
           }
         }
       }

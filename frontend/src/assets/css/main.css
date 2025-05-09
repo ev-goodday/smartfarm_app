@@ -16,6 +16,8 @@ body {
   --item-bg-white: #ffffff;
   --item-bg-lighter: #f8f9fa;
 
+  --item-green-color: #2ecc71;
+
   --aside-width: 150px;
   --header-height: 60px;
   --default-border-radius: 8px;
