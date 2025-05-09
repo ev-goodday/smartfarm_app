@@ -1,7 +1,9 @@
 <template>
   <div class="profile-view">
+    <!-- 로딩 상태 표시 -->
     <div v-if="isLoading" class="loading-state">프로필 정보를 불러오는 중...</div>
 
+    <!-- 프로필 정보 표시 -->
     <div v-else>
       <div class="profile-header">
         <div class="profile-info">
@@ -24,6 +26,35 @@
             <!-- <img src="" alt=""> -->
             설정
           </button>
+        </div>
+      </div>
+
+      <div class="profile-panels">
+        <!-- 사용자 정보 패널 -->
+        <div class="panel user-info-panel">
+          <h2>사용자 정보</h2>
+          <div class="info-list">
+            <div class="info-item">
+              <span class="info-label">이메일</span>
+              <span class="info-value">{{ email }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">전화번호</span>
+              <span class="info-value">{{ phone }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">부서</span>
+              <span class="info-value">{{ department }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">가입일</span>
+              <span class="info-value">{{ created_at }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">마지막 로그인</span>
+              <span class="info-value">{{ last_login }}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -134,6 +165,55 @@ onMounted(async () => {
 
         i {
           font-size: 1.1em;
+        }
+      }
+    }
+  }
+
+  .profile-panels {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    .panel {
+      background-color: var(--item-bg-white);
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+      h2 {
+        margin-top: 0;
+        color: #2c3e50;
+        font-size: 1.4em;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid var(--body-bg-color);
+      }
+    }
+    .user-info-panel {
+      .info-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .info-item {
+          display: flex;
+          justify-content: space-between;
+          padding: 15px 0;
+          border-bottom: 1px solid var(--item-bg-lighter);
+
+          &:last-child {
+            border-bottom: none;
+          }
+          .info-label {
+            color: #7f8c8d;
+            font-weight: 500;
+            font-size: 1em;
+          }
+          .info-value {
+            color: #2c3e50;
+            font-size: 1em;
+          }
         }
       }
     }
