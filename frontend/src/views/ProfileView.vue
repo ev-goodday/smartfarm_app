@@ -8,12 +8,12 @@
       <div class="profile-header">
         <div class="profile-info">
           <div class="profile-avatar">
-            <!-- <img :src="user.avatar" alt="User Avatar" /> -->
+            <img :src="userProfile.profile_image" alt="프로필 이미지" />
           </div>
           <div class="profile-details">
-            <h1>{{ 이름 }}</h1>
+            <h1>{{ userProfile.name }}</h1>
             <div class="profile-meta">
-              <span class="profile-role">{{ 포지션 }}</span>
+              <span class="profile-role">{{ userProfile.position }}</span>
             </div>
           </div>
         </div>
@@ -36,23 +36,23 @@
           <div class="info-list">
             <div class="info-item">
               <span class="info-label">이메일</span>
-              <span class="info-value">{{ email }}</span>
+              <span class="info-value">{{ userProfile.email }}</span>
             </div>
             <div class="info-item">
               <span class="info-label">전화번호</span>
-              <span class="info-value">{{ phone }}</span>
+              <span class="info-value">{{ userProfile.phone }}</span>
             </div>
             <div class="info-item">
               <span class="info-label">부서</span>
-              <span class="info-value">{{ department }}</span>
+              <span class="info-value">{{ userProfile.department }}</span>
             </div>
             <div class="info-item">
               <span class="info-label">가입일</span>
-              <span class="info-value">{{ created_at }}</span>
+              <span class="info-value">{{ userProfile.created_at }}</span>
             </div>
             <div class="info-item">
               <span class="info-label">마지막 로그인</span>
-              <span class="info-value">{{ last_login }}</span>
+              <span class="info-value">{{ userProfile.last_login }}</span>
             </div>
           </div>
         </div>
@@ -111,8 +111,105 @@
                 </div>
 
                 <div class="sensor-status">
-                  <span class="status-tooltip"> 온라인 </span>
+                  <span class="status-tooltip"> {{ 온라인 }} </span>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 활동 로그 패널 -->
+        <div class="panel activity-panel">
+          <h2>최근 활동</h2>
+          <div class="activity-list">
+            <div class="activity-item edit-activity">
+              <div class="activity-time">2025-04-01 14:25</div>
+              <div class="activity-content">
+                <div class="activity-icon edit-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                  </svg>
+                </div>
+                <div class="activity-text">온도 센서 #1의 임계값을 수정했습니다.</div>
+              </div>
+            </div>
+            <div class="activity-item login-activity">
+              <div class="activity-time">2025-04-01 11:30</div>
+              <div class="activity-content">
+                <div class="activity-icon login-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                    <polyline points="10 17 15 12 10 7"></polyline>
+                    <line x1="15" y1="12" x2="3" y2="12"></line>
+                  </svg>
+                </div>
+                <div class="activity-text">시스템에 로그인했습니다.</div>
+              </div>
+            </div>
+            <div class="activity-item alert-activity">
+              <div class="activity-time">2025-03-31 17:45</div>
+              <div class="activity-content">
+                <div class="activity-icon alert-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                  </svg>
+                </div>
+                <div class="activity-text">CO2 센서 알림을 확인했습니다.</div>
+              </div>
+            </div>
+            <div class="activity-item add-activity">
+              <div class="activity-time">2025-03-31 16:20</div>
+              <div class="activity-content">
+                <div class="activity-icon add-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                  </svg>
+                </div>
+                <div class="activity-text">새 센서 "조도 센서 #3"을 추가했습니다.</div>
               </div>
             </div>
           </div>
@@ -123,11 +220,13 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
 const isLoading = ref(false)
+
+const userProfile = computed(() => ({ ...store.state.user }))
 
 onMounted(async () => {
   try {
@@ -472,6 +571,131 @@ onMounted(async () => {
         }
       }
     }
+    .activity-panel {
+      .activity-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .activity-item {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          padding: 20px;
+          background-color: var(--item-bg-lighter);
+          border-radius: 12px;
+          transition: all 0.2s ease;
+          border-left: 4px solid transparent;
+
+          &:hover {
+            transform: translateX(5px);
+            background-color: #f0f2f5;
+          }
+
+          .activity-time {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            &::before {
+              content: '';
+              display: inline-block;
+              width: 6px;
+              height: 6px;
+              background-color: var(--item-blue-color);
+              border-radius: 50%;
+            }
+          }
+
+          .activity-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            .activity-icon {
+              width: 45px;
+              height: 45px;
+              border-radius: 12px;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 24px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.2em;
+
+              &.edit-icon {
+                background-color: #e3f2fd;
+                color: var(--item-blue-color);
+              }
+
+              &.login-icon {
+                background-color: #e8f5e9;
+                color: var(--item-green-color);
+              }
+
+              &.alert-icon {
+                background-color: #fff8e1;
+                color: var(--item-orange-color);
+              }
+
+              &.add-icon {
+                background-color: #e8f5e9;
+                color: var(--item-green-color);
+              }
+            }
+
+            .activity-text {
+              color: #2c3e50;
+              font-size: 1em;
+              flex: 1;
+              padding: 10px 15px;
+              background-color: var(--item-bg-white);
+              border-radius: 8px;
+              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            }
+          }
+
+          &.edit-activity {
+            border-left-color: var(--item-blue-color);
+            .activity-icon {
+              background-color: #e3f2fd;
+            }
+          }
+
+          &.login-activity {
+            border-left-color: var(--item-green-color);
+            .activity-icon {
+              background-color: #e8f5e9;
+            }
+          }
+
+          &.alert-activity {
+            border-left-color: var(--item-orange-color);
+            .activity-icon {
+              background-color: #fff8e1;
+            }
+          }
+
+          &.add-activity {
+            border-left-color: var(--item-green-color);
+            .activity-icon {
+              background-color: #e8f5e9;
+            }
+          }
+        }
+      }
+    }
   }
+}
+
+.loading-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: #666;
 }
 </style>
