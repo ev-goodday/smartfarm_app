@@ -16,6 +16,8 @@ body {
   --item-bg-white: #ffffff;
   --item-bg-lighter: #f8f9fa;
 
+  --item-red-color: #e74c3c;
+  --item-orange-color: #f39c12;
   --item-green-color: #2ecc71;
 
   --aside-width: 150px;

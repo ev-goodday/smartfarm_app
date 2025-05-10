@@ -96,6 +96,26 @@
               </div>
             </div>
           </div>
+
+          <!-- 담당 센서 패널 -->
+          <div class="panel assigned-sensors-panel">
+            <h2>담당 센서</h2>
+            <div class="sensors-list">
+              <div class="sensor-item">
+                <div class="sensor-icon">
+                  <!-- <img src="" alt=""> -->
+                </div>
+                <div class="sensor-info">
+                  <div class="sensor-name">{{ description }}</div>
+                  <div class="sensor-location">{{ location }}</div>
+                </div>
+
+                <div class="sensor-status">
+                  <span class="status-tooltip"> 온라인 </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -345,6 +365,108 @@ onMounted(async () => {
                 border-radius: 50%;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
               }
+            }
+          }
+        }
+      }
+    }
+
+    .assigned-sensors-panel {
+      .sensors-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .sensor-item {
+          display: flex;
+          align-items: center;
+          padding: 15px;
+          background-color: var(--item-bg-lighter);
+          border-radius: var(--default-border-radius);
+          transition: all 0.2s ease;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+          &:hover {
+            transform: translateX(5px);
+            background-color: var(--item-bg-lighter);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+          }
+
+          .sensor-icon {
+            width: 48px;
+            height: 48px;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--item-bg-white);
+            border-radius: 12px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+            img {
+              width: 28px;
+              height: 28px;
+              object-fit: contain;
+              transition: all 0.2s ease;
+            }
+          }
+
+          .sensor-info {
+            flex: 1;
+
+            .sensor-name {
+              font-weight: 500;
+              color: #2c3e50;
+              font-size: 1em;
+              margin-bottom: 5px;
+            }
+
+            .sensor-location {
+              font-size: 0.9em;
+              color: #7f8c8d;
+            }
+          }
+
+          .sensor-status {
+            position: relative;
+            width: 12px;
+            height: 12px;
+            padding: 5px 10px;
+            border-radius: 50%;
+            margin-left: 15px;
+            cursor: pointer;
+
+            &:hover .status-tooltip {
+              opacity: 1;
+              visibility: visible;
+            }
+
+            &.status-normal {
+              background-color: var(--item-green-color);
+            }
+
+            &.status-warning {
+              background-color: var(--item-orange-color);
+            }
+
+            &.status-error {
+              background-color: var(--item-red-color);
+            }
+
+            .status-tooltip {
+              position: absolute;
+              right: 20px;
+              top: 50px;
+              transform: translateY(-50%);
+              background-color: rgba(0, 0, 0, 0.8);
+              color: white;
+              border-radius: 4px;
+              font-size: 0.8em;
+              white-space: nowrap;
+              opacity: 0;
+              visibility: hidden;
+              transition: all 0.2s ease;
             }
           }
         }
