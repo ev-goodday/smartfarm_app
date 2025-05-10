@@ -48,11 +48,11 @@
             </div>
             <div class="info-item">
               <span class="info-label">가입일</span>
-              <span class="info-value">{{ userProfile.created_at }}</span>
+              <span class="info-value">{{ formatDate(userProfile.created_at) }}</span>
             </div>
             <div class="info-item">
               <span class="info-label">마지막 로그인</span>
-              <span class="info-value">{{ userProfile.last_login }}</span>
+              <span class="info-value">{{ formatDate(userProfile.last_login) }}</span>
             </div>
           </div>
         </div>
@@ -101,17 +101,32 @@
           <div class="panel assigned-sensors-panel">
             <h2>담당 센서</h2>
             <div class="sensors-list">
-              <div class="sensor-item">
+              <div v-for="device in devices" :key="device.device_id" class="sensor-item">
                 <div class="sensor-icon">
                   <!-- <img src="" alt=""> -->
                 </div>
                 <div class="sensor-info">
-                  <div class="sensor-name">{{ description }}</div>
-                  <div class="sensor-location">{{ location }}</div>
+                  <div class="sensor-name">{{ device.description }}</div>
+                  <div class="sensor-location">{{ device.location }}</div>
                 </div>
 
-                <div class="sensor-status">
-                  <span class="status-tooltip"> {{ 온라인 }} </span>
+                <div
+                  class="sensor-status"
+                  :class="{
+                    'status-normal': device.status === 'online',
+                    'status-warning': device.status === 'offline',
+                    'status-error': device.status === 'error',
+                  }"
+                >
+                  <span class="status-tooltip">
+                    {{
+                      device.status === 'online'
+                        ? '온라인'
+                        : device.status === 'offline'
+                          ? '오프라인'
+                          : '에러'
+                    }}
+                  </span>
                 </div>
               </div>
             </div>
@@ -222,11 +237,23 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
+import moment from 'moment'
+import 'moment/locale/ko'
 
 const store = useStore()
 const isLoading = ref(false)
 
+moment.locale('ko')
+
+const formatDate = (dateString) => {
+  if (!dateString) return '정보 없음'
+  const date = moment(dateString)
+  if (!date.isValid()) return '유효하지 않은 날짜'
+  return date.format('YYYY년 MM월 DD일')
+}
+
 const userProfile = computed(() => ({ ...store.state.user }))
+const devices = computed(() => store.state.user.userDevices)
 
 onMounted(async () => {
   try {
@@ -483,7 +510,7 @@ onMounted(async () => {
           background-color: var(--item-bg-lighter);
           border-radius: var(--default-border-radius);
           transition: all 0.2s ease;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 
           &:hover {
             transform: translateX(5px);
@@ -531,7 +558,6 @@ onMounted(async () => {
             position: relative;
             width: 12px;
             height: 12px;
-            padding: 5px 10px;
             border-radius: 50%;
             margin-left: 15px;
             cursor: pointer;
@@ -556,10 +582,11 @@ onMounted(async () => {
             .status-tooltip {
               position: absolute;
               right: 20px;
-              top: 50px;
+              top: 50%;
               transform: translateY(-50%);
               background-color: rgba(0, 0, 0, 0.8);
               color: white;
+              padding: 4px 8px;
               border-radius: 4px;
               font-size: 0.8em;
               white-space: nowrap;
